@@ -2,9 +2,9 @@
 
 namespace TaskManagerPrototype
 {
-    public class TaskPool<T> where T : class, new()
+    public class TaskPool<TaskModel> where TaskModel : class, new() // pool des tâches
     {
-        private readonly Queue<T> _objects = new Queue<T>();
+        private readonly Queue<TaskModel> _objects = new Queue<TaskModel>();
         private readonly int _poolSize;
 
         public TaskPool(int poolSize)
@@ -12,19 +12,19 @@ namespace TaskManagerPrototype
             _poolSize = poolSize;
         }
 
-        public T GetObject()
+        public TaskModel GetObject()
         {
             if (_objects.Count == 0)
             {
-                for (var i = 0; i < _poolSize; i++)
+                for (var i = 0; i < _poolSize; i++) 
                 {
-                    _objects.Enqueue(new T());
+                    _objects.Enqueue(new TaskModel());
                 }
             }
-            return _objects.Dequeue();
+            return _objects.Dequeue(); // repenser cette partie (entrer les données qui m'intéressent)
         }
 
-        public void ReleaseObject(T obj)
+        public void ReleaseObject(TaskModel obj)
         {
             if (_objects.Count < _poolSize)
             {
@@ -33,3 +33,9 @@ namespace TaskManagerPrototype
         }
     }
 }
+
+
+
+// task pool doit être update par le taskmanager (évolution des tâches) update les deux listes // les deux listes contiennent les mêmes données
+// si je supprime dans la queue, je supprime dans la pool (exemple) avoir les mêmes données dans les deux listes à tout moment
+// faire ça dans le task manager

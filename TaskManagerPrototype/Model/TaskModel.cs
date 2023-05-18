@@ -9,7 +9,7 @@ namespace TaskManagerPrototype
 
         public string Name
         {
-            get => _name;
+            get => _name; // Nom de la tâche
             set
             {
                 if (_name != value)
@@ -22,7 +22,7 @@ namespace TaskManagerPrototype
 
         public bool IsComplete
         {
-            get => _isComplete;
+            get => _isComplete; // Indique si la tâche est terminée
             set
             {
                 if (_isComplete != value)
